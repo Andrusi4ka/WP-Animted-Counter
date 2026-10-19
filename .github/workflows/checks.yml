@@ -28,6 +28,7 @@ jobs:
           find . -path ./node_modules -prune -o -name '*.php' -print0 | xargs -0 -n1 php -l
           php tests/render.php
           php tests/render.php --autosave
+          php tests/updates.php
       - run: npm test
       - run: npm run audit:duplicates
       - run: npm run audit:dead-code

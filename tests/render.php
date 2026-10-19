@@ -4,6 +4,7 @@ define('ABSPATH', __DIR__);
 if (in_array('--autosave', $argv, true)) { define('DOING_AUTOSAVE', true); }
 function add_action($hook,$callback,...$args) { $GLOBALS['test_actions'][$hook][]=$callback; }
 function add_filter(...$args) {}
+function plugin_basename($file) { return basename(dirname($file)) . '/' . basename($file); }
 function add_shortcode($name,$callback) { $GLOBALS['test_shortcodes'][$name]=$callback; }
 function absint($value) { return abs((int)$value); }
 function plugins_url($path, $file) { return $path; }
@@ -138,6 +139,13 @@ check(strpos($button,'name="publish"')!==false && strpos($button,'>Save</button>
 check(strpos($button,'wpcunter-delete-button')!==false,'Saved counters have a delete action');
 ob_start(); $GLOBALS['test_boxes']['wpcunter-save']((object)array('ID'=>1,'post_status'=>'auto-draft')); $new_buttons=ob_get_clean();
 check(strpos($new_buttons,'wpcunter-delete-button')===false,'Unsaved counters do not have a delete action');
+foreach (array($button, $new_buttons) as $save_markup) {
+	$save_dom = new DOMDocument();
+	@$save_dom->loadHTML('<form id="post">' . $save_markup . '</form>');
+	$save_xpath = new DOMXPath($save_dom);
+	check($save_xpath->query('//*[@id="submitpost"]')->length===1, 'One native publishing container');
+	check($save_xpath->query('//form[@id="post"]//*[@id="submitpost"]//button[@type="submit" and @name="publish"]')->length===1, 'New and existing counters expose Save to core post.js submit handling');
+}
 $GLOBALS['test_can_edit']=false;
 ob_start(); $GLOBALS['test_boxes']['wpcunter-save']((object)array('ID'=>1,'post_status'=>'publish')); $restricted=ob_get_clean();
 check(strpos($restricted,'wpcunter-delete-button')===false,'Delete action respects capabilities');

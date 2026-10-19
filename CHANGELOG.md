@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.9.1 — 2026-10-19
+
+- Fixed the leave-page warning on Save by restoring the native WordPress publishing container around the custom button.
+- Added a protected Duplicate row action: copy all stored counter settings into a new draft with its own shortcode ID.
+- Added native WordPress update checks and release ZIP downloads from GitHub.
+- Added a permission/nonce-protected Check for updates link and plugin version details.
+- Cached release metadata and transient failures; excluded drafts, prereleases and unexpected download URLs.
+- Added updater tests for caching, failures, package validation and isolation from other plugins.
+
 ## 1.9.0 — 2026-10-19
 
 - Added Ring fill, Arc with marker and Gradient arc with marker.

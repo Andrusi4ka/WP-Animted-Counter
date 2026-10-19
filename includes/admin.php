@@ -85,7 +85,8 @@ add_action( 'init', function() {
 add_action( 'add_meta_boxes_wpcunter', function() {
 	remove_meta_box('submitdiv', 'wpcunter', 'side');
 	add_meta_box('wpcunter-save', 'Save', function($post) {
-		echo '<div class="wpcunter-save-actions"><button type="submit" name="publish" id="wpcunter-save-button" class="button button-primary button-large" value="Save">Save</button>';
+		// Core post.js binds Save and its unsaved-changes handling inside #submitpost.
+		echo '<div id="submitpost" class="wpcunter-save-actions"><button type="submit" name="publish" id="wpcunter-save-button" class="button button-primary button-large" value="Save">Save</button>';
 		if ($post->post_status !== 'auto-draft' && current_user_can('delete_post', $post->ID)) {
 			$url = get_delete_post_link($post->ID);
 			if ($url) { echo '<a class="button button-large wpcunter-delete-button" href="' . esc_url($url) . '">Delete</a>'; }

@@ -43,6 +43,7 @@ Requires WordPress 6.0+ and PHP 7.4+. Node.js 24 is used only for development ch
 ```sh
 npm ci
 php tests/render.php
+php tests/updates.php
 npm test
 npm run test:browser
 npm run audit:duplicates
@@ -67,6 +68,8 @@ GitHub Actions runs PHP 7.4/8.3/8.4 checks and a Chrome run on PHP 8.3. Automate
 
 ## Release
 
-After committing production changes, `npm run build` creates `dist/wp-animated-counter-1.9.0.zip` and `SHA256SUMS.txt` from that exact commit. Tests, dependencies, workflows and development tools are excluded. A matching `v1.9.0` tag runs CI before publishing the release and attaching the ZIP/checksum.
+Updates are checked through the standard WordPress plugin update mechanism using public GitHub Releases. Under Plugins, use **Check for updates** to refresh immediately; when a newer release exists, WordPress displays **Update now**. Successful release metadata is cached for six hours; failures for five minutes. The plugin does not force automatic installation. Downloads use the release ZIP with the existing `wp-cunter/` directory; updating code does not delete counters or settings. Existing installations without the updater need this version installed once manually.
+
+After committing production changes, `npm run build` creates a versioned ZIP and `SHA256SUMS.txt` from that exact commit. Tests, dependencies, workflows and development tools are excluded. A matching version tag runs CI before publishing the release and attaching the ZIP/checksum.
 
 GPL-3.0-or-later. See [LICENSE](LICENSE) and [third-party notices](THIRD-PARTY-NOTICES.md).

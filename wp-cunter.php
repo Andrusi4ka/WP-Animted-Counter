@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WP Animated Counter
  * Description: Theme-independent counters with an admin editor, shortcodes and optional WPBakery integration.
- * Version: 1.9.0
+ * Version: 1.9.1
  * Requires at least: 6.0
  * Requires PHP: 7.4
  * Text Domain: wp-cunter
@@ -13,10 +13,12 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-define('WPCUNTER_VERSION', '1.9.0');
+define('WPCUNTER_VERSION', '1.9.1');
 require_once __DIR__ . '/includes/admin.php';
 require_once __DIR__ . '/includes/responsive.php';
 require_once __DIR__ . '/includes/settings.php';
+require_once __DIR__ . '/includes/updates.php';
+require_once __DIR__ . '/includes/duplicates.php';
 
 /** Refresh browser caches after local asset changes without changing release metadata. */
 function wpcunter_asset_version($path) {

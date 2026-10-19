@@ -1,6 +1,6 @@
 {
   "name": "wp-animted-counter",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "private": true,
   "description": "Development checks for the WP Animated Counter WordPress plugin",
   "scripts": {
