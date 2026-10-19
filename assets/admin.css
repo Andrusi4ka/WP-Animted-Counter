@@ -1,0 +1,68 @@
+/* Editor shell and tabs. */
+#wpcunter-editor { border-top: 3px solid #2271b1; }
+#wpcunter-editor .inside { margin: 0; padding: 0; }
+#wpcunter-editor .postbox-header { padding: 8px 12px; }
+.wpcunter-editor { background: #fff; min-height: 460px; }
+.wpcunter-tabs { display: flex; gap: 0; background: #f5f5f5; border-bottom: 1px solid #ddd; padding: 0 24px; }
+.wpcunter-tabs button { font: 600 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: transparent; border: 0; border-bottom: 3px solid transparent; padding: 19px 22px; cursor: pointer; color: #666; }
+.wpcunter-tabs button[aria-selected=true] { color: #135e96; border-bottom-color: #2271b1; background: #f0f6fc; }
+.wpcunter-tabs button:hover { color: #135e96; background: #eaf3fb; }
+.wpcunter-tabs button:focus-visible { outline: 2px solid #2271b1; outline-offset: -4px; }
+.wpcunter-panel { padding: 30px; }
+.wpcunter-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 30px; }
+.wpcunter-column { display: flex; flex-direction: column; gap: 26px; min-width: 0; }
+
+/* Fields and compact groups in the left column. */
+.wpcunter-field { min-width: 0; }
+.wpcunter-field label { display: block; font-weight: 600; color: #333; margin-bottom: 10px; font-size: 13px; }
+.wpcunter-field input:not([type=color]), .wpcunter-field select { box-sizing: border-box; width: 100%; max-width: none; height: 42px; min-height: 42px; line-height: normal; margin: 0; border: 1px solid #ddd; border-radius: 0; padding: 5px 12px; box-shadow: none; }
+.wpcunter-field input[type=color] { box-sizing: border-box; width: 100%; height: 42px; padding: 3px; border: 1px solid #ddd; background: white; }
+.wpcunter-field input:focus, .wpcunter-field select:focus { border-color: #2271b1; box-shadow: 0 0 0 1px #2271b1; outline: none; }
+.wpcunter-field .description { margin: 7px 0 0; }
+.wpcunter-value-fields, .wpcunter-type-fields, .wpcunter-text-fields { display: grid; gap: 16px; min-width: 0; align-items: start; }
+.wpcunter-value-fields { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.wpcunter-type-fields, .wpcunter-text-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.wpcunter-settings-block, .wpcunter-layout { border: 1px solid #e0e4e8; border-radius: 6px; padding: 20px; background: transparent; min-width: 0; margin: 0; }
+.wpcunter-settings-content { display: flex; flex-direction: column; gap: 24px; }
+.wpcunter-settings-block > legend, .wpcunter-layout > legend { padding: 0 8px; margin-left: -8px; font-size: 16px; line-height: 1.4; font-weight: 600; color: #1d2327; }
+
+/* Visual layout choices. Illustrations are bundled with this plugin. */
+.wpcunter-layout-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.wpcunter-layout-group { margin: 0; padding: 0; border: 0; min-width: 0; }
+.wpcunter-layout-group[data-layout=align] { grid-column: 1 / -1; }
+.wpcunter-layout-group legend { padding: 0; margin-bottom: 10px; font-size: 13px; }
+.wpcunter-image-options { display: flex; gap: 8px; flex-wrap: wrap; }
+.wpcunter-image-option { position: relative; cursor: pointer; }
+.wpcunter-image-option input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.wpcunter-image-option > span { display: flex; align-items: center; justify-content: center; padding: 8px; background: white; border: 1px solid #949494; min-width: 62px; min-height: 36px; border-radius: 2px; }
+.wpcunter-image-option img { display: block; width: 62px; max-width: 62px; max-height: 62px; }
+.wpcunter-image-option input:checked + span { border-color: #2271b1; box-shadow: 0 0 0 1px #2271b1, 0 3px 7px #2271b122; }
+.wpcunter-image-option input:focus-visible + span { outline: 2px solid #2271b1; outline-offset: 3px; }
+.wpcunter-layout > .description { margin-bottom: 0; }
+
+/* Per-field device controls. */
+.wpcunter-field-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+.wpcunter-field-head label { margin: 0; }
+.wpcunter-type-fields .wpcunter-field-head, .wpcunter-text-fields .wpcunter-field-head { min-height: 36px; align-items: flex-end; }
+.wpcunter-devices { display: inline-flex; gap: 2px; margin-left: auto; }
+.wpcunter-devices button { position: relative; border: 0; background: transparent; color: #8c8f94; padding: 2px; cursor: pointer; line-height: 1; }
+.wpcunter-devices .dashicons { font-size: 16px; width: 18px; height: 18px; }
+.wpcunter-devices button[aria-pressed=true] { color: #2271b1; background: #f0f6fc; border-radius: 3px; }
+.wpcunter-devices button:hover { color: #135e96; }
+.wpcunter-devices button:focus-visible { outline: 2px solid #2271b1; }
+.wpcunter-devices button.has-value:after { content: ''; position: absolute; right: 1px; top: 0; width: 4px; height: 4px; background: #2271b1; border-radius: 50%; }
+.wpcunter-panel[hidden], .wpcunter-field[hidden], .wpcunter-layout-group[hidden], .wpcunter-responsive [data-device-input][hidden] { display: none; }
+body.post-type-wpcunter #publish { background: #2271b1; border-color: #2271b1; }
+body.post-type-wpcunter #publish:hover { background: #135e96; border-color: #135e96; }
+#wpcunter-shortcode input[readonly] { color: #135e96; background: #f0f6fc; border-color: #b6d4ed; }
+
+@media (max-width: 1100px) {
+    .wpcunter-layout-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 782px) {
+    .wpcunter-grid, .wpcunter-value-fields, .wpcunter-type-fields, .wpcunter-text-fields { grid-template-columns: 1fr; }
+    .wpcunter-value-fields, .wpcunter-type-fields, .wpcunter-text-fields { gap: 26px; }
+    .wpcunter-panel { padding: 20px; }
+    .wpcunter-tabs { padding: 0 8px; }
+    .wpcunter-tabs button { padding: 15px 12px; }
+}

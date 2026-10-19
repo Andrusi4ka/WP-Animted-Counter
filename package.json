@@ -1,0 +1,17 @@
+{
+  "name": "wp-animted-counter",
+  "version": "1.8.0",
+  "private": true,
+  "description": "Development checks for the WP Animated Counter WordPress plugin",
+  "scripts": {
+    "test": "node tests/frontend.cjs && node tests/admin.cjs && node tests/audit.cjs",
+    "audit:duplicates": "jscpd --config .jscpd.json",
+    "audit:dead-code": "jscpd assets --dead-code --entry admin.js --entry frontend.js --min-confidence 80",
+    "build": "node scripts/build.cjs"
+  },
+  "devDependencies": {
+    "jscpd": "5.4.1",
+    "jsdom": "29.1.1",
+    "postcss": "8.5.31"
+  }
+}
