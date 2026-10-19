@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.9.0 — 2026-10-19
+
+- Added Ring fill, Arc with marker and Gradient arc with marker.
+- Added a true angular opacity gradient, direct gradient thickness and symmetric open-arc geometry.
+- Added responsive ring diameter/thickness and marker diameter, independent effect colors and adjustable marker color.
+- Added configurable duration (default 2000ms) and optional quartic end slowdown.
+- Reserved number width to prevent layout shifts during counting, font loads and viewport resizing.
+- Simplified admin: Numbers/Text/Appearance on the left; Animations on the right; 50/25/25 effect/duration/slowdown controls.
+- Replaced publishing controls with Save/Delete and a shortcode block; added matching WPBakery/menu icons.
+- Removed placeholders, alignment controls, design tabs and unused layout assets/CSS.
+- Preserved existing IDs, aliases, legacy size conversion and hidden design values.
+- Added Chrome pixel/geometry/animation checks, native WordPress publish/save/Trash integration tests and stronger static/reference checks.
+
 ## 1.8.0 — 2026-10-19
 
 First public release of the theme-independent plugin.

@@ -1,26 +1,25 @@
 (function () {
     'use strict';
     document.querySelectorAll('.wpcunter-editor').forEach(function (editor) {
-        var tabs = Array.from(editor.querySelectorAll('[role=tab]'));
-        function activate(tab) {
-            tabs.forEach(function (item) { item.setAttribute('aria-selected', String(item === tab)); });
-            editor.querySelectorAll('[role=tabpanel]').forEach(function (panel) { panel.hidden = panel.id !== tab.getAttribute('aria-controls'); });
-        }
-        tabs.forEach(function (tab, index) {
-            tab.addEventListener('click', function () { activate(tab); });
-            tab.addEventListener('keydown', function (event) {
-                var next;
-                if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
-                if (event.key === 'ArrowLeft') next = (index + tabs.length - 1) % tabs.length;
-                if (event.key === 'Home') next = 0;
-                if (event.key === 'End') next = tabs.length - 1;
-                if (next !== undefined) { event.preventDefault(); activate(tabs[next]); tabs[next].focus(); }
-            });
-        });
         function dependencies() {
             editor.querySelector('[data-field=color]').hidden = editor.querySelector('#wpcunter-color_scheme').value !== 'custom';
-            var position = editor.querySelector('input[name="wpcunter_settings[animation_position]"]:checked');
-            editor.querySelector('[data-layout=vertical_align]').hidden = position && position.value === 'top';
+            var effect = editor.querySelector('#wpcunter-counter_animation').value;
+            var descriptions = {
+                none: 'Animates the number without a visual effect.',
+                ring: 'A full circle fills with the count. The number and label stay inside.',
+                ring_marker: 'An open arc fills with the count. A circular marker follows its tip.',
+                ring_band: 'An open gradient arc fades from fully transparent to solid color at the moving marker. No outline.'
+            };
+            editor.querySelector('[data-effect-description]').textContent = descriptions[effect] || descriptions.none;
+            editor.querySelector('[data-field=ring_thickness] label').textContent = effect === 'ring_band' ? 'Gradient thickness, px' : 'Ring thickness, px';
+            editor.querySelector('[data-field=ring_color] label').textContent = effect === 'ring_band' ? 'Gradient color' : (effect === 'ring_marker' ? 'Arc color' : 'Ring color');
+            var ring = ['ring', 'ring_marker', 'ring_band'].includes(effect);
+            editor.querySelector('.wpcunter-marker-fields').hidden = !['ring_marker', 'ring_band'].includes(effect);
+
+            editor.querySelector('.wpcunter-ring-fields').hidden = !ring;
+            ['ring_color', 'ring_thickness', 'ring_size'].forEach(function (key) {
+                editor.querySelector('[data-field=' + key + ']').hidden = !ring;
+            });
         }
         editor.querySelectorAll('.wpcunter-responsive').forEach(function (field) {
             var label = field.querySelector('label');

@@ -40,6 +40,8 @@ function wpcunter_responsive_style($values) {
 	foreach (array('desktop','tablet','mobile') as $device) {
 		$v=wpcunter_device_values($values,$device);
 		$number=max(1,(float)$v['font_size']);
+		$marker_size=min((int)$v['marker_size'], (int)$v['ring_size']/2);
+		$stroke_width=(int)$v['ring_thickness'];
 		$properties=array(
 			'number-size'=>$number . 'px',
 			'label-size'=>max(1,(float)$v['label_font_size']) . 'px',
@@ -48,6 +50,11 @@ function wpcunter_responsive_style($values) {
 			'padding'=>max(0,(int)$v['padding']) . 'px',
 			'margin'=>(int)$v['margin'] . 'px',
 			'radius'=>max(0,(int)$v['radius']) . 'px',
+			'ring-size'=>(int)$v['ring_size'] . 'px',
+			'ring-thickness'=>(int)$v['ring_thickness'] . 'px',
+			'ring-stroke'=>$stroke_width * 100 / (int)$v['ring_size'],
+			'ring-radius'=>49 - max($stroke_width, in_array($v['counter_animation'],array('ring_marker','ring_band'),true)?$marker_size:0) * 50 / (int)$v['ring_size'],
+			'marker-radius'=>$marker_size * 50 / (int)$v['ring_size'],
 		);
 		foreach ($properties as $key=>$value) { $style.='--wpcunter-' . $key . '-' . $device . ':' . $value . ';'; }
 	}

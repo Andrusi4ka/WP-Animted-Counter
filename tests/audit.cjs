@@ -13,10 +13,14 @@ function files(dir) {
 const all = files(root);
 const production = all.filter(name => /\.(php|js|css)$/.test(name) && !name.includes(`${path.sep}tests${path.sep}`));
 const source = production.map(name => fs.readFileSync(name, 'utf8')).join('\n');
+const logic = production.filter(name => !name.endsWith('.css')).map(name => fs.readFileSync(name, 'utf8')).join('\n');
 for (const file of production.filter(name => name.endsWith('.css'))) {
     const ast = postcss.parse(fs.readFileSync(file, 'utf8'), {from: file});
     const seen = new Set();
     ast.walkRules(rule => {
+        for (const [, name] of rule.selector.matchAll(/\.(wpcunter-[a-z0-9-]+)/g)) {
+            assert.ok(logic.includes(name), `Unreferenced CSS class: ${name}`);
+        }
         const ancestors = [];
         for (let parent = rule.parent; parent.type !== 'root'; parent = parent.parent) ancestors.unshift(parent.params || parent.type);
         const key = `${ancestors.join('/')}|${rule.selector}`;
@@ -44,9 +48,11 @@ assert.equal(version, require('../package.json').version);
 assert.ok(header.includes(`define('WPCUNTER_VERSION', '${version}')`), 'One asset version constant');
 const hashes = new Map();
 const crypto = require('node:crypto');
-for (const file of all.filter(name => /\.(jpg|png)$/.test(name))) {
+for (const file of all.filter(name => /\.(jpg|png|svg)$/.test(name))) {
     const hash = crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
     assert.ok(!hashes.has(hash), `Duplicate asset: ${file}`);
     hashes.set(hash, file);
+    const relative = path.relative(root, file).split(path.sep).join('/');
+    assert.ok(logic.includes(relative), `Unreferenced image asset: ${relative}`);
 }
 console.log(`PASS: ${production.length} source files, CSS selectors/properties, PHP references, asset duplicates and version consistency`);

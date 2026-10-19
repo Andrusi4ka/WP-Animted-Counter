@@ -1,9 +1,13 @@
-First public release of **WP Animated Counter**.
+**WP Animated Counter 1.9.0** adds three working effects: Ring fill, Arc with marker and Gradient arc with marker.
 
-Create reusable animated counters in a standalone admin editor and insert them via shortcode or WPBakery. Includes suffixes, responsive number/text sizes, device controls, visual layout choices and shared colors. Woodmart and WPBakery are optional.
+- Responsive ring/marker geometry and independent number/text sizes.
+- A true angular 0–100% opacity gradient without a separate outline.
+- Configurable duration (2000ms by default) and optional end slowdown.
+- Stable number width, centered content and column-controlled group placement.
+- A simpler single-page admin with Save, Delete, shortcode and matching WPBakery icon.
+- Removed placeholder effects, obsolete alignment/design controls and unused layout assets/styles.
+- Existing IDs/shortcodes and hidden legacy design values are preserved.
 
-Additional animation effects are placeholders in this version. Existing counter IDs and shortcodes are preserved; legacy size presets are converted to pixels.
+Validation: PHP 7.4/8.3/8.4, DOM/animation tests, real Chrome gradient pixel and responsive tests, live WordPress save/database/trash checks, clone and dead-code scans. No known npm dependency vulnerabilities were reported at verification time.
 
-Validation: PHP 7.4/8.3/8.4 syntax and behavior, DOM interaction tests, animation tests, local WordPress/database integration, duplicate-code scan and dead-code checks. See README for the scope of these checks.
-
-Download `wp-animated-counter-1.8.0.zip` below and install it through **Plugins → Add New → Upload Plugin**. `SHA256SUMS.txt` contains the archive checksum. Keep the `wp-cunter` directory name to update an existing installation.
+Install **wp-animated-counter-1.9.0.zip** using Plugins > Add New > Upload Plugin. Keep the `wp-cunter` folder name when updating. **SHA256SUMS.txt** contains its checksum.
